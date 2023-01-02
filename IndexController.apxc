@@ -1,0 +1,35 @@
+public class IndexController {
+    public integer totalPrice {get; set;}
+    public integer totalRooms {get; set;}
+    public integer totalBathRooms {get; set;}
+    public integer totalGarage {get; set;}
+    public String address {get; set;}
+    public String type {get; set;}
+    
+    public List<SelectOption> getOption() {
+        Schema.DescribeFieldResult describeResult = 
+            Propriedade__c.Tipo__c.getDescribe();
+        List<Schema.PicklistEntry> entries = 
+            describeResult.getPickListValues();
+        List<SelectOption> options = new List<SelectOption>();
+        
+        for(Schema.PicklistEntry pEntry: entries) {
+            if(pEntry.isActive()) {
+                options.add(new SelectOption(pEntry.getValue(), 
+                                             pEntry.getLabel()));     
+            }
+        }
+        return options;
+    }
+    
+    public void saveProperty() {
+        Propriedade__c newProperty = new Propriedade__c();
+        newProperty.Banheiro__c = totalBathRooms;
+        newProperty.Total_Quartos__c = totalRooms;
+        newProperty.Endereco__c = address;
+        newProperty.Tipo__c = type;
+        
+        insert newProperty;
+    }
+    
+}
