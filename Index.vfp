@@ -1,0 +1,32 @@
+<apex:page controller="IndexController">
+    <style>
+        #conteudo {
+        	margin-top: 10px;
+        	margin-left: 10px;
+        	margin-right: 10px;
+        }
+    </style>
+    
+    <div id="conteudo">
+		<div id="form-information">
+            <apex:form>
+                <apex:pageBlock title="Cadastrar Propriedade">
+                   <apex:panelGrid columns="2">
+                       Tipo:<apex:selectList value="{!type}" size="1" multiselect="false" required="true">
+                       <apex:selectOptions value="{!Option}">
+                           
+                       </apex:selectOptions>
+                       
+                       
+                       </apex:selectList>
+                       Quartos:<apex:inputText value="{!totalRooms}"/>
+                       Banheiros:<apex:inputText value="{!totalBathRooms}"/>
+                       Endereço:<apex:inputText value="{!address}"/>
+                       Vagas na garagem:<apex:inputText value="{!totalGarage}"/>
+                    </apex:panelGrid>
+                </apex:pageBlock>
+                <apex:commandButton value="SALVAR" action="{!saveProperty}"></apex:commandButton>
+            </apex:form>
+        </div>        
+    </div>
+</apex:page>
